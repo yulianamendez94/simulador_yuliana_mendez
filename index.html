@@ -3,12 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--JS-->
     <script defer src="./js/main.js"></script>
-    <title>Simulador</title>
+    <title>Simulador de Torneo</title>
 </head>
 <body>
     <h1>Yuliana Mendez</h1>
-    <!--Este simulador organiza la información de un torneo de futbol, para ello le pide al usuario que ingrese la cantidad de equipos que forman parte del mismo, cuantos partidos ha ganado, perdido o empatado cada equipo, luego al finalizar le muestra al usuario que equipo es el campeón.-->
+    <p>Este simulador organiza la información de un torneo de fútbol. Ingresa los equipos, sus partidos ganados, perdidos y empatados, y al finalizar, verás el equipo campeón y los clasificados al próximo torneo (más de 5 puntos).</p>
+
+    <section>
+        <h2>Tabla de Puntos</h2>
+        <table id="tabla-puntos">
+            <thead>
+                <tr>
+                    <th>Equipo</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section>
+        <h2>Equipos Clasificados al próximo torneo</h2>
+        <ul id="equipos-clasificados"></ul>
+    </section>
 </body>
 </html>
