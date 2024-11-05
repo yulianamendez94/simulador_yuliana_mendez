@@ -31,15 +31,16 @@ function cargarEquipos(cantidadequipos) {
     return equipos;
 }
 
-function calcular_campeone (lista) {
-    let indice_del_mayor = 0
-    for (let i=0; i< lista.length; i++) {
-        if (lista[i] > lista[indice_del_mayor]) {
-            indice_del_mayor = i
+function calcular_campeone (equipos) {
+    let campeon = equipos[0];
+
+    equipos.forEach(equipo => {
+        if (equipo.calcularPuntos() > campeon.calcularPuntos()) {
+            campeon = equipo;
         }
-    }
-    indice_del_mayor = indice_del_mayor + 1
-    alert("Le campeone es el equipo "+ indice_del_mayor + " FELICITACIONES")
+    });
+
+    alert("Le campeone es el equipo "+ campeon.nombre + " FELICITACIONES")
 }
 
 let cantidadequipos = parseInt(prompt("Ingrese cantidad de equipos"))
