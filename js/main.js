@@ -1,3 +1,16 @@
+class Equipo {
+    constructor(nombre, ganados, perdidos, empatados) {
+        this.nombre = nombre;
+        this.ganados = ganados;
+        this.perdidos = perdidos;
+        this.empatados = empatados;
+    }
+
+    calcularPuntos() {
+        return this.ganados * 3 + this.perdidos * 0 + this.empatados * 1;
+    }
+}
+
 function calcular_puntos (partidosg,partidosp,partidose) {
     let puntos = partidosg*3 + partidosp*0 + partidose*1
     return puntos
