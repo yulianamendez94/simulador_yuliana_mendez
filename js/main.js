@@ -16,12 +16,19 @@ function calcular_puntos (partidosg,partidosp,partidose) {
     return puntos
 }
 
-function cargardatos (numero_equipo) {
-    let ganados = parseInt(prompt("Inrgese partidos ganados del equipo " + numero_equipo))
-    let perdidos = parseInt(prompt("Inrgese partidos perdidos del equipo " + numero_equipo))
-    let empatados = parseInt(prompt("Inrgese partidos empatados del equipo " + numero_equipo))
-    let puntos = calcular_puntos(ganados, perdidos, empatados)
-    return puntos
+function cargarEquipos(cantidadequipos) {
+    const equipos = [];
+
+    for (let i = 1; i <= cantidadequipos; i++) {
+        const nombre = prompt("Ingrese nombre del equipo");
+        const ganados = parseInt(prompt("Ingrese partidos ganados del equipo" + nombre));
+        const perdidos = parseInt(prompt("Ingrese partidos perdidos del equipo" + nombre));
+        const empatados = parseInt(prompt("Ingrese partidos empatados del equipo" + nombre));
+        
+        equipos.push(new Equipo(nombre, ganados, perdidos, empatados));
+    }
+
+    return equipos;
 }
 
 function calcular_campeone (lista) {
