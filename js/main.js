@@ -67,9 +67,53 @@ function mostrarEquiposClasificados(equipos) {
     }
 }
 
-function main() {
+function guardarEquiposEnLocalStorage(equipos) {
+    localStorage.setItem("cantidadEquipos", equipos.length);
+    equipos.forEach((equipo, numero) => {
+        localStorage.setItem("equipo" + numero + "_nombre", equipo.nombre);
+        localStorage.setItem("equipo" + numero + "_ganados", equipo.ganados);
+        localStorage.setItem("equipo" + numero + "_perdidos", equipo.perdidos);
+        localStorage.setItem("equipo" + numero + "_empatados", equipo.empatados);
+    });
+}
+
+function cargarEquiposDesdeLocalStorage() {
+    const cantidadEquipos = parseInt(localStorage.getItem("cantidadEquipos"));
+    const equipos = [];
+
+    for (let i = 0; i < cantidadEquipos; i++) {
+        const nombre = localStorage.getItem("equipo" + i + "_nombre");
+        const ganados = parseInt(localStorage.getItem("equipo" + i + "_ganados"));
+        const perdidos = parseInt(localStorage.getItem("equipo" + i + "_perdidos"));
+        const empatados = parseInt(localStorage.getItem("equipo" + i + "_empatados"));
+
+        equipos.push(new Equipo(nombre, ganados, perdidos, empatados));
+    }
+    return equipos;
+}
+
+function cargarEquipos() {
+    const equipos = cargarEquiposDesdeLocalStorage();
+    if (equipos.length > 0) {
+        return equipos;
+    }
+
     const cantidadEquipos = parseInt(prompt("Ingrese cantidad de equipos"));
-    const equipos = cargarEquipos(cantidadEquipos);
+    for (let i = 1; i <= cantidadEquipos; i++) {
+        const nombre = prompt("Ingrese nombre del equipo");
+        const ganados = parseInt(prompt("Ingrese partidos ganados del equipo " + nombre));
+        const perdidos = parseInt(prompt("Ingrese partidos perdidos del equipo " + nombre));
+        const empatados = parseInt(prompt("Ingrese partidos empatados del equipo " + nombre));
+        
+        equipos.push(new Equipo(nombre, ganados, perdidos, empatados));
+    }
+
+    guardarEquiposEnLocalStorage(equipos);
+    return equipos
+}
+
+function main() {
+    const equipos = cargarEquipos();
 
     mostrarTablaPuntos(equipos);
     mostrarEquiposClasificados(equipos);
