@@ -11,11 +11,6 @@ class Equipo {
     }
 }
 
-function calcular_puntos (partidosg,partidosp,partidose) {
-    let puntos = partidosg*3 + partidosp*0 + partidose*1
-    return puntos
-}
-
 function cargarEquipos(cantidadequipos) {
     const equipos = [];
 
@@ -43,10 +38,42 @@ function calcular_campeone (equipos) {
     alert("Le campeone es el equipo "+ campeon.nombre + " FELICITACIONES")
 }
 
-let cantidadequipos = parseInt(prompt("Ingrese cantidad de equipos"))
-lista_puntos = []
-for (let i = 1; i <= cantidadequipos; i++ ) {
-    const puntos_equipo = cargardatos(i)
-    lista_puntos.push(puntos_equipo)
+function mostrarTablaPuntos(equipos) {
+    const tablaPuntos = document.querySelector('#tabla-puntos tbody');
+    tablaPuntos.innerHTML = '';
+
+    equipos.forEach(equipo => {
+        const fila = document.createElement('tr');
+        fila.innerHTML = "<td>" + equipo.nombre + "</td><td>" + equipo.calcularPuntos() + "</td>";
+        tablaPuntos.appendChild(fila);
+    });
 }
-calcular_campeone (lista_puntos)
+
+function mostrarEquiposClasificados(equipos) {
+    const equiposClasificados = document.querySelector('#equipos-clasificados');
+    equiposClasificados.innerHTML = '';
+
+    const algunEquipoConMasDe5Puntos = equipos.some(equipo => equipo.calcularPuntos() > 5);
+
+    if (algunEquipoConMasDe5Puntos) {
+        const equiposConMasDe5Puntos = equipos.filter(equipo => equipo.calcularPuntos() > 5);
+        equiposConMasDe5Puntos.forEach(equipo => {
+            const item = document.createElement('li');
+            item.textContent = equipo.nombre + " - " +  equipo.calcularPuntos() + "puntos";
+            equiposClasificados.appendChild(item);
+        });
+    } else {
+        equiposClasificados.textContent = "No hay equipos clasificados al próximo torneo";
+    }
+}
+
+function main() {
+    const cantidadEquipos = parseInt(prompt("Ingrese cantidad de equipos"));
+    const equipos = cargarEquipos(cantidadEquipos);
+
+    mostrarTablaPuntos(equipos);
+    mostrarEquiposClasificados(equipos);
+    calcular_campeone(equipos);
+}
+
+main();
