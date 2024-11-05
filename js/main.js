@@ -11,21 +11,6 @@ class Equipo {
     }
 }
 
-function cargarEquipos(cantidadequipos) {
-    const equipos = [];
-
-    for (let i = 1; i <= cantidadequipos; i++) {
-        const nombre = prompt("Ingrese nombre del equipo");
-        const ganados = parseInt(prompt("Ingrese partidos ganados del equipo " + nombre));
-        const perdidos = parseInt(prompt("Ingrese partidos perdidos del equipo " + nombre));
-        const empatados = parseInt(prompt("Ingrese partidos empatados del equipo " + nombre));
-        
-        equipos.push(new Equipo(nombre, ganados, perdidos, empatados));
-    }
-
-    return equipos;
-}
-
 function calcular_campeone (equipos) {
     let campeon = equipos[0];
 
